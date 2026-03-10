@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Coding Doubt Solver</title>
+<style>
+body{
+font-family:Arial;
+text-align:center;
+background:#1f4f75;
+color:white;
+padding-top:80px;
+}
+
+textarea{
+width:400px;
+height:120px;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+}
+
+#answer{
+margin-top:20px;
+background:white;
+color:black;
+padding:20px;
+width:400px;
+margin-left:auto;
+margin-right:auto;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🤖 AI Coding Doubt Solver</h1>
+
+<textarea id="question" placeholder="Ask your coding doubt"></textarea>
+<br>
+
+<button onclick="askAI()">Ask AI</button>
+
+<div id="answer"></div>
+
+<script>
+
+async function askAI(){
+
+let question = document.getElementById("question").value;
+
+let response = await fetch("/ask",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({question:question})
+});
+
+let data = await response.json();
+
+document.getElementById("answer").innerText = data.answer;
+
+}
+
+</script>
+
+</body>
+</html>
